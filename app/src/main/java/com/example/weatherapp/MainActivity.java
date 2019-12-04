@@ -48,11 +48,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Sensor", sensor.getName());
 
         }
-        Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        final Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         manager.registerListener(new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                Log.i("Sensor", "Sensor.TYPE_PROXIMITY"+ sensorEvent.values[0]);
+                Log.i("Sensor", "Sensor " +sensor.getName()+ " "+sensorEvent.values[0]);
 
             }
 

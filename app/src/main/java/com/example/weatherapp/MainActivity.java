@@ -1,8 +1,14 @@
 package com.example.weatherapp;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
+import android.net.nsd.NsdManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -12,6 +18,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,4 +39,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
+        for (Sensor sensor:sensors) {
+            Log.i("Sensor", sensor.getName());
+
+        }
+        Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        manager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                Log.i("Sensor", "Sensor.TYPE_PROXIMITY"+ sensorEvent.values[0]);
+
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        }, sensor, 100);
+
+
+     }
 }

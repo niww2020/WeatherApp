@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,19 +12,28 @@ import androidx.annotation.Nullable;
 
 public class CircleView extends View {
 
+    private int mPoint;
     Paint paint;
     int radius;
     int color;
 
+    // used in view creation programmatically
     public CircleView(Context context) {
         super(context);
         initPaint();
 //        initPaint(100, 32423);
     }
 
+    // used in XML layout file
     public CircleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-//        initPaint();
+
+        final TypedArray typedArray = context.
+                obtainStyledAttributes(attrs, R.styleable.CircleView, 0, 0);
+        initPaint();
+        mPoint = typedArray.getInt(R.styleable.CircleView_points, mPoint);
+        typedArray.recycle();
+
     }
 
     public CircleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -55,12 +65,14 @@ public class CircleView extends View {
         super.onDraw(canvas);
         canvas.drawCircle(100,100,100,paint);
 
+//        canvas.drawArc();
     }
 
     private void initPaint() {
         paint = new Paint();
         paint.setColor(Color.GREEN);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(100);
 //        this.radius = radius;
     }
 }

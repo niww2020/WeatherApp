@@ -3,6 +3,11 @@
     <declare-styleable name="CircleView">
         <attr name="cv_radius" format="integer" />
         <attr name="cv_color" format="color" />
+
+        <attr name="points" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="min" format="integer"/>
+        <attr name="step" format="integer"/>
         
     </declare-styleable>
 

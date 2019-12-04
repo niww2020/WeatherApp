@@ -1,6 +1,7 @@
 package com.example.weatherapp.ui.notifications;
 
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -59,5 +60,11 @@ public class NotificationsFragment extends Fragment {
     private void createCircle(View root) {
         ((LinearLayoutCompat)root.findViewById(R.id.llNotificationsFragment))
                 .addView(new CircleView(getContext()));//todo what a context I can use, and why??
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        SensorManager sensorManager = (SensorManager)
     }
 }

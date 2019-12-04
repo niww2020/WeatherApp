@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:id="@+id/llNotificationsFragment"
     >
 
     <TextView
@@ -32,5 +33,9 @@
         android:layout_height="wrap_content"
         android:text="Call"
         />
+<!--    <com.example.weatherapp.CircleView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        />-->
 
 </androidx.appcompat.widget.LinearLayoutCompat>

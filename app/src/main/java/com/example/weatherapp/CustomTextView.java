@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -20,6 +22,9 @@ public class CustomTextView extends View {
     private int mPoint;
     Paint paint;
     Paint paintArc;
+    Paint paintText;
+    Paint paintTextWeather;
+
     float radius;
     int textSize;
     Color color;
@@ -77,6 +82,7 @@ public class CustomTextView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+
     }
 
     @Override
@@ -85,15 +91,18 @@ public class CustomTextView extends View {
 
         //todo add hour but its max value 12
         calendar = Calendar.getInstance();
-        float hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
 
-        RectF mRectF = new RectF(10,10,400,400);
+        RectF mRectF = new RectF(20,20,400,400);
+        Path path = new Path();
+        path.addArc(mRectF,180,(180*hour)/24);
 //        mRectF.centerX(g)
 //        canvas.drawCircle(radius,radius,radius,paint);
-        canvas.drawText("+ " + hour,radius,radius,paint);
         canvas.drawArc(mRectF,180,180,false,paintArc);
         canvas.drawArc(mRectF,180,(180*hour)/24,false,paint);
+        canvas.drawText("-10 C",200,200,paintTextWeather);
+        canvas.drawTextOnPath("Hour "+ hour,path,0,10,paintText);
 
     }
 
@@ -105,16 +114,23 @@ public class CustomTextView extends View {
         paint.setAntiAlias(true);//todo what it is?
         paint.setStyle(Paint.Style.STROKE);
         paint.setTextSize(radius);
-
-//        paint.setTextAlign(Paint.Align.CENTER);
-//        paint.setTextLocale();
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(30);
 
         paintArc = new Paint();
         paintArc.setAntiAlias(true);
         paintArc.setColor(Color.YELLOW);
-        paintArc.setStrokeWidth(10);
+        paintArc.setStrokeWidth(30);
         paintArc.setStyle(Paint.Style.STROKE);
+
+        paintText = new Paint();
+        paintText.setColor(Color.YELLOW);
+        paintText.setTextSize(30);
+        paintText.setTextAlign(Paint.Align.CENTER);
+
+        paintTextWeather = new Paint();
+        paintTextWeather.setColor(Color.RED);
+        paintTextWeather.setTextSize(100);
+        paintTextWeather.setTextAlign(Paint.Align.CENTER);
 
 
 

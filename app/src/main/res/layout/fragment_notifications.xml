@@ -40,13 +40,6 @@
         android:max="300"
         android:progress="100"
         />
-    <com.example.weatherapp.CustomTextView
-        android:id="@+id/customTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:ctv_color="@color/colorPrimaryDark"
-        app:ctv_size="100"
-        />
 
 
 

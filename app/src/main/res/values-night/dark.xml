@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary1">#3F51B5</color>-->
+<!--    <color name="colorPrimaryDark1">#2196F3</color>-->
+<!--    <color name="colorAccent1">#B39DDB</color>-->
+<!--    <style name="night" parent="Theme.AppCompat.DayNight">-->
+    <item name="colorPrimary" type="color">@color/colorPrimaryDark1</item>
+    <item name="colorPrimaryDark" type="color">@color/colorPrimaryDark1</item>
+    <item name="colorAccent" type="color">@color/colorAccent1</item>
+<!--    <item name="color" type="color">#000000</item>-->
+<!--    <item name="backGround" type="color"> </item>-->
+<!--    <item name="" type=""-->
+<!--    <item name="windowBackground" type="color">@drawable/gradient</item>-->
+
+    <!--    <color name="backGroud" ></color>-->
+
+<!--    </style>-->
+<!--    <color name="back"-->
+<!--    <item name="" type="color">@color/colorText1</item>-->
+<!--    <item name="Background" type="color">@color/backGround1</item>-->
+</resources>

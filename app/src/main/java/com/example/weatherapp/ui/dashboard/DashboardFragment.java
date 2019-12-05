@@ -11,8 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.Weather;
+import com.example.weatherapp.WeatherAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
@@ -30,6 +37,9 @@ public class DashboardFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
+
         return root;
     }
 }

@@ -33,26 +33,22 @@
         android:layout_height="wrap_content"
         android:text="Call"
         />
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbTextSize"
+        android:max="300"
+        android:progress="100"
+        />
+    <com.example.weatherapp.CustomTextView
+        android:id="@+id/customTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbarSize="100dp"
-        android:max="100"
-        android:maxWidth="100dp"
-        android:scrollbarStyle="outsideOverlay"
-
-
+        app:ctv_color="@color/colorPrimaryDark"
+        app:ctv_size="100"
         />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-        <TextView
-            android:id="@+id/tvForSensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sensor"/>
-    </ScrollView>
+
 
 <!--    <com.example.weatherapp.CircleView-->
 <!--        android:layout_width="wrap_content"-->

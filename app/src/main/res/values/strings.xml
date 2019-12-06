@@ -39,4 +39,6 @@
     <string name="action_old_settings">Button of setting invisible</string>
     <string name="dayOfWeek">Day of week</string>
     <string name="off_pic">Off_pic</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_info">Info</string>
 </resources>

@@ -13,13 +13,18 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.weatherapp.ui.dashboard.DashboardFragment"
+        android:name="com.example.weatherapp.ui.settings.SettingsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.weatherapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_info"
+        android:name="com.example.weatherapp.ui.info.InfoFragment"
+        android:label="@string/title_info"
+        tools:layout="@layout/fragment_info" />
 </navigation>

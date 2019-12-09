@@ -3,4 +3,42 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="temperatureOfDay">-10C</string>
+    <string name="town">Moscow</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="evening">Evening</string>
+    <string name="night">Night</string>
+    <string name="now">Now</string>
+    <string name="Night_mode">Night mode</string>
+    <string name="button_more_detailed">More detailed</string>
+    <string name="country">country</string>
+    <string name="go_to_country_without_visa">Go to country without visa</string>
+    <string name="settings">Settings</string>
+    <string name="sing">!</string>
+    <string name="back">Back</string>
+    <string name="current_temperature">Temperature</string>
+    <string name="temperature">Temperature</string>
+    <string name="wind">Wind</string>
+    <string name="clouds">Clouds</string>
+    <string name="wetness">Wetness</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sity">Sity</string>
+    <string name="path">Path</string>
+    <string name="time">Time</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_old_settings">Button of setting invisible</string>
+    <string name="dayOfWeek">Day of week</string>
+    <string name="off_pic">Off_pic</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_info">Info</string>
 </resources>

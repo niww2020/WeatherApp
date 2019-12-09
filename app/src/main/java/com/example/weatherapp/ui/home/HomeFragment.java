@@ -11,8 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.Weather;
+import com.example.weatherapp.WeatherAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -23,13 +30,30 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_home);
+//        homeViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+
+        List<Weather> weatherOFWeekDays = new ArrayList<>();
+        weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));
+        weatherOFWeekDays.add(new Weather("+5", "Tuesday", "2"));
+        weatherOFWeekDays.add(new Weather("+3", "Wednesday", "3"));
+        weatherOFWeekDays.add(new Weather("+6", "Thursday", "4"));
+        weatherOFWeekDays.add(new Weather("+1", "Friday", "5"));
+        weatherOFWeekDays.add(new Weather("-1", "Saturday", "6"));
+        weatherOFWeekDays.add(new Weather("0", "Sunday", "7"));
+
+
+        RecyclerView recyclerView = root.findViewById(R.id.rv);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        WeatherAdapter adapter = new WeatherAdapter(getContext(), weatherOFWeekDays);
+        recyclerView.setAdapter(adapter);
+
         return root;
     }
 }

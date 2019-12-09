@@ -43,13 +43,7 @@ public class NotificationsFragment extends Fragment {
         });
 
 
-        root.findViewById(R.id.bToCall).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:89112406009"));
-                startActivity(intent);
-            }
-        });
+
         return root;
 
     }

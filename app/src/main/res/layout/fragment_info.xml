@@ -9,6 +9,7 @@
     android:id="@+id/llNotificationsFragment"
     >
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,17 +20,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <SeekBar
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bToCall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sbTextSize"
-        android:max="300"
-        android:progress="200"
+        android:text="Call to support"
         />
 
 
 
-<!--    <com.example.weatherapp.CircleView-->
+
+
+    <!--    <com.example.weatherapp.CircleView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        />-->

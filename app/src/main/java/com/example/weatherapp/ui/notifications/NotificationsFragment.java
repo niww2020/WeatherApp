@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -15,9 +16,11 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.weatherapp.CustomTextView;
 import com.example.weatherapp.R;
+import com.google.android.material.tabs.TabItem;
 
 public class NotificationsFragment extends Fragment {
     CustomTextView customTextView;
@@ -38,9 +41,12 @@ public class NotificationsFragment extends Fragment {
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
 
-
             }
         });
+
+        //todo test tabitem
+
+//        (TabItem)root.findViewById(R.id.tiTest)
 
 
         root.findViewById(R.id.bToCall).setOnClickListener(new View.OnClickListener() {

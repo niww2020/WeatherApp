@@ -4,16 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.CustomViewGraphics;
 import com.example.weatherapp.R;
 import com.example.weatherapp.Weather;
 import com.example.weatherapp.WeatherAdapter;
@@ -37,6 +41,23 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+
+
+        //todo create graphic in custom view
+        CustomViewGraphics customViewGraphics = new CustomViewGraphics(getContext());
+        LinearLayoutCompat linearLayoutCompat = root.findViewById(R.id.llFragmentHome);
+
+
+        linearLayoutCompat.addView(customViewGraphics);
+//        linearLayoutCompatView.setOrientation(LinearLayoutCompat.HORIZONTAL);
+//        horizontalScrollView.addView(linearLayoutCompatView);
+//        linearLayoutCompatView.setLayoutParams(layoutParams);
+//        horizontalScrollView.addView(customViewGraphics);
+//        linearLayoutCompat.addView(customViewGraphics);
+
+
+
+
 
         List<Weather> weatherOFWeekDays = new ArrayList<>();
         weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));

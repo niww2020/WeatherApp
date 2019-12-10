@@ -9,17 +9,21 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.weatherapp.CustomTextView;
 import com.example.weatherapp.R;
+import com.example.weatherapp.Test.TestFragment;
+import com.example.weatherapp.ui.settings.SettingsFragment;
 import com.google.android.material.tabs.TabItem;
 
 public class NotificationsFragment extends Fragment {
@@ -36,6 +40,7 @@ public class NotificationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         final TextView textView = root.findViewById(R.id.text_notifications);
+
         notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -43,12 +48,35 @@ public class NotificationsFragment extends Fragment {
 
             }
         });
+/** Test fragment manager*/
+//
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        TestFragment testFragment = new TestFragment();
+//        transaction.add(R.id.llToFragment, testFragment);
+//        transaction.commit();
 
         //todo test tabitem
 
-//        (TabItem)root.findViewById(R.id.tiTest)
+//        root.findViewById(R.id.ti1).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////
+//                Toast.makeText(getContext(), "Monday", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//        root.findViewById(R.id.ti2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+//        });
 
 
+/** test call */
         root.findViewById(R.id.bToCall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,12 +84,13 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         return root;
 
     }
 
     private void createCircle(View root) {
-        ((LinearLayoutCompat)root.findViewById(R.id.llNotificationsFragment))
+        ((LinearLayoutCompat) root.findViewById(R.id.llNotificationsFragment))
                 .addView(new CustomTextView(getContext()));//todo what a context? I can use, and why??
     }
 
@@ -69,6 +98,7 @@ public class NotificationsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 //        SensorManager sensorManager = (SensorManager)
+
     }
 
     @Override

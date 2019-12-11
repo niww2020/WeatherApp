@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,10 +12,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
+import com.example.weatherapp.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,11 +29,19 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CityPreference cityPreference;
+    FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        cityPreference = new CityPreference(this);
+
+
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -42,11 +55,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+
+
+        /** Test sensor*/
         SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
         for (Sensor sensor:sensors) {

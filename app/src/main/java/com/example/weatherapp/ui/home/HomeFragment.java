@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.CityPreference;
 import com.example.weatherapp.R;
 import com.example.weatherapp.Weather;
 import com.example.weatherapp.WeatherAdapter;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
+
         List<Weather> weatherOFWeekDays = new ArrayList<>();
         weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));
         weatherOFWeekDays.add(new Weather("+5", "Tuesday", "2"));
@@ -56,4 +58,5 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
 }

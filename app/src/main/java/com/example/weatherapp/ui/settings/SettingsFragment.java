@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.weatherapp.CityPreference;
 import com.example.weatherapp.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class SettingsFragment extends Fragment {
 
@@ -31,8 +33,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        TextInputEditText inputCity = root.findViewById(R.id.etYourLocation);
 
+        inputCity.getText().toString();
 
         return root;
     }
+
+
+
 }

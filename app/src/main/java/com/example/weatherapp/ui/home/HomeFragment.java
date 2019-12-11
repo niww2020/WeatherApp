@@ -27,6 +27,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,13 +36,22 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    WebView webView ;
 
-//    private String url = "https://openweathermap.org/weathermap";
+
+
+    //    private String url = "https://openweathermap.org/weathermap";
 //    private String url = "https://github.com";
     private String url = "https://www.google.ru";
+//    private String url = "http://4pda.ru";
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,10 +65,10 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        WebView webView ;
         webView = root.findViewById(R.id.webView);
 //        loadWedView(webView);
 //        loadWedViewAsyncTask(webView);
+//        webView.loadUrl(url);
 
 
 
@@ -68,8 +78,39 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        loadWedViewAsyncTask();
+//                loadWedView(webView);
+//        webView.loadUrl(url);
+//        loadWedViewAsyncTask(webView);
 
+        LoadWebPage loadWebPage = new LoadWebPage();
+        loadWebPage.execute(url);
+
+    }
+
+    private class LoadWebPage extends AsyncTask<String, String, String> {
+        OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Request request = new Request.Builder()
+                    .url(strings[0])
+                    .get()
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                return response.body().string();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            webView.loadData(result,"text/html; charset=utf-8","utf-8");
+            super.onPostExecute(result);
+        }
     }
 
     private void loadWedViewAsyncTask(final WebView webView) {

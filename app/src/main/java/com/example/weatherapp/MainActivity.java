@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
-        for (Sensor sensor:sensors) {
+        for (Sensor sensor : sensors) {
             Log.i("Sensor", sensor.getName());
 
         }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         manager.registerListener(new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                Log.i("Sensor", "Sensor " +sensor.getName()+ " "+sensorEvent.values[0]);
+                Log.i("Sensor", "Sensor " + sensor.getName() + " " + sensorEvent.values[0]);
 
             }
 
@@ -69,5 +69,6 @@ public class MainActivity extends AppCompatActivity {
         }, sensor, 100);
 
 
-     }
+
+    }
 }

@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment {
 //        });
 
         sharedPreferences = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
-
         currentCity = root.findViewById(R.id.yourCurrentLocation);
         currentCity.setText(sharedPreferences.getString("City",""));
 

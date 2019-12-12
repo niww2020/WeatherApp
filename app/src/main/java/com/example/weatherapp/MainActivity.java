@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         /** */
         preferences = getSharedPreferences("Preference",MODE_PRIVATE);
         String currentCity = preferences.getString("City", "London");
-        preferences.edit().putString("City", "New York").apply();
+//        preferences.edit().putString("City", "New York").apply();
 
         Boolean key = preferences.getBoolean("Key1", false);
         Log.i("Key", key.toString());

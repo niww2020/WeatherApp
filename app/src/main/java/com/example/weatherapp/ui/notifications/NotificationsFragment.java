@@ -1,9 +1,13 @@
 package com.example.weatherapp.ui.notifications;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +26,14 @@ import com.example.weatherapp.CustomTextView;
 import com.example.weatherapp.MainActivity;
 import com.example.weatherapp.R;
 import com.example.weatherapp.TestIntentService;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class NotificationsFragment extends Fragment {
     CustomTextView customTextView;
+    SharedPreferences sharedPreferences;
+    TextInputEditText editText;
+    TextView tv;
+    LinearLayoutCompat llToDo;
 
     private NotificationsViewModel notificationsViewModel;
 
@@ -46,24 +55,33 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-
-        root.findViewById(R.id.bToCall).setOnClickListener(new View.OnClickListener() {
+        sharedPreferences = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
+        editText = root.findViewById(R.id.etToDo);
+        llToDo = root.findViewById(R.id.llToDo);
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:89112406009"));
-                startActivity(intent);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
 
             }
-        });
-        root.findViewById(R.id.bToTestIntentService).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-/** test intent service */
-                getActivity().startService(new Intent(getActivity(), TestIntentService.class));
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                tv = new TextView(getContext());
+//                tv.setText(editText.getText()+"\n");
+                tv.setText(s);
+                llToDo.addView(tv);
+            }
         });
+
+//        if (editText.())
+
+
         return root;
 
     }

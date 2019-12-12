@@ -1,5 +1,7 @@
 package com.example.weatherapp.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    TextView currentCity;
+    SharedPreferences sharedPreferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +41,11 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+
+        sharedPreferences = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+        currentCity = root.findViewById(R.id.yourCurrentLocation);
+        currentCity.setText(sharedPreferences.getString("City",""));
 
         List<Weather> weatherOFWeekDays = new ArrayList<>();
         weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));

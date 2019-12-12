@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -23,6 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        /** */
+        preferences = getSharedPreferences("Preference",MODE_PRIVATE);
+        String currentCity = preferences.getString("City", "London");
+        preferences.edit().putString("City", "New York").apply();
+
+        Boolean key = preferences.getBoolean("Key1", false);
+        Log.i("Key", key.toString());
+        key = !key;
+        preferences.edit().putBoolean("Key1", true).apply();
+        Log.i("Key", key.toString());
+
+
 
 
     }

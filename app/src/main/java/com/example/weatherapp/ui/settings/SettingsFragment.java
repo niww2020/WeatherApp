@@ -18,11 +18,17 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.weatherapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel settingsViewModel;
     private TextInputEditText editText;
     SharedPreferences sharedPreferences;
+    Set<String> set;
+    List<String> list;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,17 +42,21 @@ public class SettingsFragment extends Fragment {
                 textView.setText(s);
             }
         });
-/** test */
-        sharedPreferences = getActivity().getSharedPreferences("Preference",Context.MODE_PRIVATE);
 
+        /** test  sharedPreferences
+         * */
+        sharedPreferences = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
         editText = root.findViewById(R.id.etYourLocation);
-//        editText.setText("Moscow");
-//        sharedPreferences.contains("City");
-        String currentCity = sharedPreferences.getString("City","");
+        String currentCity = sharedPreferences.getString("City", "");
+        set = new TreeSet<>();
+        set.add(currentCity);
         editText.setText(currentCity);
 
 
-        Log.i("Key",sharedPreferences.getString("City","") );
+
+
+
+        Log.i("Key", sharedPreferences.getString("City", ""));
 
         return root;
     }
@@ -54,7 +64,8 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onPause() {
         sharedPreferences.edit().putString("City", editText.getText().toString()).apply();
-        Log.i("Key",sharedPreferences.getString("City","") );
+        Log.i("Key", sharedPreferences.getString("City", ""));
+        sharedPreferences.edit().putStringSet("Key",set).apply();
         super.onPause();
     }
 }

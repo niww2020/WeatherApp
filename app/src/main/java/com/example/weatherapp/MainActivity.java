@@ -34,6 +34,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
     private String url = "https://www.google.ru";
+    CityPreferences cityPreferences;
 
 
     @Override
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);//FIXME fix
+
+        cityPreferences = new CityPreferences(this);
+//        cityPreferences.setCity("Moscow");
 
 
     }

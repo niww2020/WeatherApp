@@ -40,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //fixme theme apply on start app
+        cityPreferences = new CityPreferences(this);
+
+        if (cityPreferences.getDarkMode()) {
+            setTheme(R.style.AppThemeDark);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
+
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -54,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);//FIXME fix
 
-        cityPreferences = new CityPreferences(this);
 //        cityPreferences.setCity("Moscow");
+
+
 
 
     }
@@ -63,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
         for (Sensor sensor : sensors) {
@@ -85,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }, sensor, 100);
 
         loadWedView((WebView) findViewById(R.id.webView));
+
 
 
     }

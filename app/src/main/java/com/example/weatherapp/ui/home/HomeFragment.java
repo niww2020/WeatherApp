@@ -1,9 +1,14 @@
 package com.example.weatherapp.ui.home;
 
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,16 +19,42 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.CityPreferences;
 import com.example.weatherapp.R;
 import com.example.weatherapp.Weather;
 import com.example.weatherapp.WeatherAdapter;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    WebView webView ;
+    TextView yourCurrentLocation;
+    CityPreferences cityPreferences;
+
+
+
+    //    private String url = "https://openweathermap.org/weathermap";
+//    private String url = "https://github.com";
+    private String url = "https://www.google.ru";
+//    private String url = "http://4pda.ru";
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +68,15 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+
+//        webView = root.findViewById(R.id.webView);
+//        loadWedView(webView);
+//        loadWedViewAsyncTask(webView);
+//        webView.loadUrl(url);
+        yourCurrentLocation = root.findViewById(R.id.yourCurrentLocation);
+        cityPreferences = new CityPreferences(getActivity());
+        yourCurrentLocation.setText(cityPreferences.getCity());
+
 
         List<Weather> weatherOFWeekDays = new ArrayList<>();
         weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));
@@ -54,6 +94,10 @@ public class HomeFragment extends Fragment {
         WeatherAdapter adapter = new WeatherAdapter(getContext(), weatherOFWeekDays);
         recyclerView.setAdapter(adapter);
 
+
+
         return root;
     }
+
+
 }

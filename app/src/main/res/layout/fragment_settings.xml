@@ -22,7 +22,7 @@
 
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch1"
+        android:id="@+id/switchToDarkMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Night_mode" />

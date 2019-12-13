@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.info;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.ui.home.HomeViewModel;
 
 public class InfoFragment extends Fragment {
+    Intent intent;
 
     private InfoViewModel infoViewModel;
 
@@ -22,6 +24,10 @@ public class InfoFragment extends Fragment {
                 ViewModelProviders.of(this).get(InfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_info, container, false);
 
+        intent = new Intent();
+
         return root;
+
+
     }
 }

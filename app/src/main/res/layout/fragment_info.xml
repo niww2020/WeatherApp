@@ -18,6 +18,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
 
         >
 
@@ -26,6 +28,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Project on GitHUb" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bToCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call back"
+            />
+
 
 
     </LinearLayout>

@@ -38,6 +38,14 @@ public class InfoFragment extends Fragment {
 
             }
         });
+        root.findViewById(R.id.bToCall).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+8 8"));
+                startActivity(intent);
+            }
+        });
+
 
         return root;
 

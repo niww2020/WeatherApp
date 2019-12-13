@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, sensor, 100);
 
-        loadWedView((WebView) findViewById(R.id.webView));
+//        loadWedView((WebView) findViewById(R.id.webView));
 
 
 

@@ -65,139 +65,32 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        webView = root.findViewById(R.id.webView);
+
+//        webView = root.findViewById(R.id.webView);
 //        loadWedView(webView);
 //        loadWedViewAsyncTask(webView);
 //        webView.loadUrl(url);
+
+        List<Weather> weatherOFWeekDays = new ArrayList<>();
+        weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));
+        weatherOFWeekDays.add(new Weather("+5", "Tuesday", "2"));
+        weatherOFWeekDays.add(new Weather("+3", "Wednesday", "3"));
+        weatherOFWeekDays.add(new Weather("+6", "Thursday", "4"));
+        weatherOFWeekDays.add(new Weather("+1", "Friday", "5"));
+        weatherOFWeekDays.add(new Weather("-1", "Saturday", "6"));
+        weatherOFWeekDays.add(new Weather("0", "Sunday", "7"));
+
+
+        RecyclerView recyclerView = root.findViewById(R.id.rv);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        WeatherAdapter adapter = new WeatherAdapter(getContext(), weatherOFWeekDays);
+        recyclerView.setAdapter(adapter);
 
 
 
         return root;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-//                loadWedView(webView);
-//        webView.loadUrl(url);
-//        loadWedViewAsyncTask(webView);
 
-        LoadWebPage loadWebPage = new LoadWebPage();
-        loadWebPage.execute(url);
-
-    }
-
-    private class LoadWebPage extends AsyncTask<String, String, String> {
-        OkHttpClient client = new OkHttpClient();
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Request request = new Request.Builder()
-                    .url(strings[0])
-                    .get()
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                return response.body().string();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            webView.loadData(result,"text/html; charset=utf-8","utf-8");
-            super.onPostExecute(result);
-        }
-    }
-
-    private void loadWedViewAsyncTask(final WebView webView) {
-        new AsyncTask<String, String, String>(){
-
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null) {
-                    webView.loadData(s,"text/html; charset=utf-8","utf-8");
-
-                }
-                super.onPostExecute(s);
-
-            }
-
-            @Override
-            protected String doInBackground(String... strings) {
-                try {
-                    Log.i("Thread", Thread.currentThread().getName());
-
-                    URL uri = new URL(url);
-                    HttpsURLConnection connection = (HttpsURLConnection) uri.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(10000);
-                    connection.connect();
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        return in.lines().collect(Collectors.joining("\n"));
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail", e);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail", e);
-
-                }
-
-                return null;
-            }
-        }.execute(url);
-
-
-
-    }
-
-
-        private void loadWedView(final WebView webView) {
-        final Handler handler = new Handler();
-        Log.i("Thread", Thread.currentThread().getName());
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.i("Thread", Thread.currentThread().getName());
-
-                    URL uri = new URL(url);
-                    HttpsURLConnection connection = (HttpsURLConnection) uri.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(10000);
-                    connection.connect();
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                        final String result = in.lines().collect(Collectors.joining("\n"));
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                webView.loadData(result,"text/html; charset=utf-8","utf-8");
-                            }
-                        });
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail 1", e);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail 2", e);
-
-                }
-            }
-        }).start();
-
-    }
 }

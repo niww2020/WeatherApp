@@ -54,8 +54,6 @@ public class SettingsFragment extends Fragment {
         editText.setText(cityPreferences.getCity());
         Log.i("Switch", String.valueOf(switchToDarkMode.isChecked()));
 
-
-
         return root;
     }
 

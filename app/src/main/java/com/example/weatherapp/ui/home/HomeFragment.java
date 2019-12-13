@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.CityPreferences;
 import com.example.weatherapp.R;
 import com.example.weatherapp.Weather;
 import com.example.weatherapp.WeatherAdapter;
@@ -44,6 +45,8 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     WebView webView ;
+    TextView yourCurrentLocation;
+    CityPreferences cityPreferences;
 
 
 
@@ -70,6 +73,10 @@ public class HomeFragment extends Fragment {
 //        loadWedView(webView);
 //        loadWedViewAsyncTask(webView);
 //        webView.loadUrl(url);
+        yourCurrentLocation = root.findViewById(R.id.yourCurrentLocation);
+        cityPreferences = new CityPreferences(getActivity());
+        yourCurrentLocation.setText(cityPreferences.getCity());
+
 
         List<Weather> weatherOFWeekDays = new ArrayList<>();
         weatherOFWeekDays.add(new Weather("+10", "Monday", "1"));

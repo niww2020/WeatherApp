@@ -1,52 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llNotificationsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:id="@+id/llNotificationsFragment"
-    >
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:helperText="Enter text">
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etToDo"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        />
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:orientation="vertical"
-            android:id="@+id/llToDo"
+        android:orientation="horizontal"
+        app:helperText="Enter text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etToDo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bToDo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Add" />
+
+
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llToDo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
-
-
-<!--    <com.example.weatherapp.CircleView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        />-->
 
 </androidx.appcompat.widget.LinearLayoutCompat>

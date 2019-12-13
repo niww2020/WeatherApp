@@ -28,12 +28,18 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.TestIntentService;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NotificationsFragment extends Fragment {
     CustomTextView customTextView;
     SharedPreferences sharedPreferences;
     TextInputEditText editText;
     TextView tv;
     LinearLayoutCompat llToDo;
+    AppCompatButton button;
+    Set<String> text;
+
 
     private NotificationsViewModel notificationsViewModel;
 
@@ -44,42 +50,30 @@ public class NotificationsFragment extends Fragment {
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-
-
-            }
-        });
+        text = new HashSet<>();
 
         sharedPreferences = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
         editText = root.findViewById(R.id.etToDo);
         llToDo = root.findViewById(R.id.llToDo);
-        editText.addTextChangedListener(new TextWatcher() {
+        button = root.findViewById(R.id.bToDo);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onClick(View v) {
                 tv = new TextView(getContext());
-//                tv.setText(editText.getText()+"\n");
-                tv.setText(s);
+                tv.setTextSize(50);
+
+                text.add(String.valueOf(editText.getText()));
+
+//                sharedPreferences.edit().putStringSet("",)
+                tv.setText(editText.getText());
                 llToDo.addView(tv);
+                editText.setText("");
+
+
             }
         });
 
-//        if (editText.())
 
 
         return root;

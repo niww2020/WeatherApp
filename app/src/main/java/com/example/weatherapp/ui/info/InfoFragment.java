@@ -24,7 +24,7 @@ public class InfoFragment extends Fragment {
                 ViewModelProviders.of(this).get(InfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_info, container, false);
 
-        intent = new Intent();
+//        intent = new Intent();
 
         return root;
 

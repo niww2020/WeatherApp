@@ -6,13 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/llNotificationsFragment"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calendar" />
 
     <CalendarView
         android:id="@+id/calendarView"
@@ -27,7 +23,6 @@
 
         <TextView
             android:id="@+id/linkToGitHub"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Project on GitHUb" />

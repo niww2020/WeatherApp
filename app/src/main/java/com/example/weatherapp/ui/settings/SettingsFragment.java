@@ -53,9 +53,9 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
+    public void onPause() {
         cityPreferences.setCity(String.valueOf(editText.getText()));
 
-        super.onResume();
+        super.onPause();
     }
 }

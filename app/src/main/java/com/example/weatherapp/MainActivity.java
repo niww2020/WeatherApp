@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
-    private String url = "https://www.google.ru";
     CityPreferences cityPreferences;
 
 
@@ -97,50 +96,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }, sensor, 100);
 
-//        loadWedView((WebView) findViewById(R.id.webView));
 
 
 
     }
 
-    private void loadWedView(final WebView webView) {
-        final Handler handler = new Handler();
-        Log.i("Thread", Thread.currentThread().getName());
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.i("Thread", Thread.currentThread().getName());
 
-                    URL uri = new URL(url);
-                    HttpsURLConnection connection = (HttpsURLConnection) uri.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(10000);
-                    connection.connect();
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                        final String result = in.lines().collect(Collectors.joining("\n"));
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                webView.loadData(result, "text/html; charset=utf-8", "utf-8");
-                            }
-                        });
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail 1", e);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("WebView", "Fail 2", e);
-
-                }
-            }
-        }).start();
-    }
 
 
 }

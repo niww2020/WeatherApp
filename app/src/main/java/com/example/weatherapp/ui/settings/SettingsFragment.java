@@ -50,7 +50,7 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
         switchToDarkMode = root.findViewById(R.id.switchToDarkMode);
         switchToDarkMode.setChecked(cityPreferences.getDarkMode());
 
-        //fixme add lestener
+        //fixme add listener
         WeatherProvider.getInstance().addListener(this);
 
 

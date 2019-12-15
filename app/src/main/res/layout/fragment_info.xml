@@ -16,6 +16,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/llInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,6 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Project on GitHUb" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivInfo" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bToCall"
             android:layout_width="wrap_content"

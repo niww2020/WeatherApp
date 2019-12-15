@@ -19,6 +19,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.Weather;
 import com.example.weatherapp.WeatherAdapterRecycleView;
 import com.example.weatherapp.weatherModel.WeatherModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,10 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+//        Picasso.LoadedFrom
+//        Picasso.get()
+//                .load()
+//                .info();
 
         return root;
     }

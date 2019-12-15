@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +16,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.ui.home.HomeViewModel;
+import com.squareup.picasso.Picasso;
 
 public class InfoFragment extends Fragment {
     Intent intent;
     TextView linkToGit;
+    LinearLayout llInfo;
+    ImageView ivInfo;
+
 
 
     private InfoViewModel infoViewModel;
@@ -45,6 +51,12 @@ public class InfoFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Picasso.get()
+                .load("http://pngimg.com/uploads/github/github_PNG40.png")
+                .resize(50,50)
+                .into((ImageView) root.findViewById(R.id.ivInfo));
+
 
 
         return root;

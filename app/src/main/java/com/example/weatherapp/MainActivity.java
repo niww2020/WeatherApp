@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.weatherapp.weatherModel.WeatherModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
         loadWedViewOkHttpAndParseJson("Lisboa");
 //        loadWedViewHttpURL();
+
+        /** load picture */
+//        Picasso.
 
 
     }

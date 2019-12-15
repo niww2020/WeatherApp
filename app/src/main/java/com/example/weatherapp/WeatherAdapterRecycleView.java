@@ -11,20 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
+public class WeatherAdapterRecycleView extends RecyclerView.Adapter<WeatherAdapterRecycleView.ViewHolder> {
 
     private LayoutInflater inflater;
     private List<Weather> weather;
 //    private ViewHolder viewHolder;
 
-    public WeatherAdapter(Context context, List<Weather> weather) {
+    public WeatherAdapterRecycleView(Context context, List<Weather> weather) {
         this.inflater = LayoutInflater.from(context);
         this.weather = weather;
     }
 
     
     @Override
-    public WeatherAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+    public WeatherAdapterRecycleView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
 
         View view = inflater.inflate(R.layout.weather_of_week_day, viewGroup, false);
 
@@ -33,7 +33,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
 
     @Override
-    public void onBindViewHolder(  WeatherAdapter.ViewHolder viewHolder, int position) {//todo why viewholder type??
+    public void onBindViewHolder(WeatherAdapterRecycleView.ViewHolder viewHolder, int position) {//todo why viewholder type??
         Weather currentWeather = this.weather.get(position);
         viewHolder.dayOfWeek.setText(currentWeather.getDayOfWeek());
         viewHolder.dayOfMonth.setText(currentWeather.getDayOfMonth());

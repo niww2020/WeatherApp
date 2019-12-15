@@ -13,8 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import com.example.weatherapp.weatherModel.WeatherModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -25,6 +29,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -32,10 +37,15 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MainActivity extends AppCompatActivity {
-    private String url = "https://www.google.ru";
-    CityPreferences cityPreferences;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
+public class MainActivity extends AppCompatActivity {
+    CityPreferences cityPreferences;
+    WeatherModel weatherModel;
+
+    private static String KEY = "e83d0265c9865659af525e50e89b8edd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        cityPreferences.setCity("Moscow");
 
+//        loadWedViewOkHttpAndParseJson("Lisboa");
+//        loadWedViewHttpURL();
 
 
 
@@ -76,47 +88,75 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
-        for (Sensor sensor : sensors) {
-            Log.i("Sensor", sensor.getName());
-
-        }
-
-        final Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        manager.registerListener(new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                Log.i("Sensor", "Sensor " + sensor.getName() + " " + sensorEvent.values[0]);
-
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-
-            }
-        }, sensor, 100);
-
-//        loadWedView((WebView) findViewById(R.id.webView));
-
-
+//        Toast.makeText(getApplicationContext(),
+//                                    weatherModel.getCity().getName()== null ? "null":weatherModel.getCity().getName()
+//                                    , Toast.LENGTH_SHORT).show();
 
     }
 
-    private void loadWedView(final WebView webView) {
+
+    private void loadWedViewOkHttpAndParseJson( String cityName) {
         final Handler handler = new Handler();
+        /** create Okhttp*/
+        OkHttpClient client = new OkHttpClient();
+
+
+        new Thread(new Runnable() {
+            WeatherModel model = null;
+
+            @Override
+            public void run() {
+
+                Request request = new Request.Builder()
+                        .url("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=" + KEY)
+                        .build();
+
+                try {
+                    Response response = client.newCall(request).execute();
+                    String string = response.body().string();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+//                                webView.loadUrl(url);
+//                            webView.loadData(string, "text/html; charset=utf-8", "utf-8");
+
+                            /** parsing JSON and save to WeatherModel.class*/
+                            Gson gson = new Gson();
+                            model = gson.fromJson(string, WeatherModel.class);
+//                            Log.i("Gson", model.getCity().getName());
+
+//                            Toast.makeText(getApplicationContext(),
+//                                    model.getCity().getName()== null ? "null":model.getCity().getName()
+//                                    , Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
+    private void loadWedViewHttpURL() {
+        final Handler handler = new Handler();
+
         Log.i("Thread", Thread.currentThread().getName());
         new Thread(new Runnable() {
+        WeatherModel model = null ;
             @Override
             public void run() {
                 try {
                     Log.i("Thread", Thread.currentThread().getName());
 
-                    URL uri = new URL(url);
-                    HttpsURLConnection connection = (HttpsURLConnection) uri.openConnection();
+                    URL uri = new URL("http://api.openweathermap.org/data/2.5/weather?q=London&appid=" + KEY);
+                    HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(10000);
                     connection.connect();
+
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -124,7 +164,14 @@ public class MainActivity extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                webView.loadData(result, "text/html; charset=utf-8", "utf-8");
+//                                webView.loadUrl(url);
+//                                webView.loadData(result, "text/html; charset=utf-8", "utf-8");
+
+                                /** parsing JSON and save to WeatherModel.class*/
+                                Gson gson = new Gson();
+                                model = gson.fromJson(result, WeatherModel.class);
+
+
                             }
                         });
                     }
@@ -141,6 +188,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+
+
+
 
 
 }

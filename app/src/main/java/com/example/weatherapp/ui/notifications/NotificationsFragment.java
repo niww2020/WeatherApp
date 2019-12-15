@@ -211,8 +211,8 @@ public class NotificationsFragment extends Fragment {
                             webView.loadData(string, "text/html; charset=utf-8", "utf-8");
 
                             /** parsing JSON and save to WeatherModel.class*/
-                            Gson gson = new Gson();
-                            model = gson.fromJson(string, WeatherModel.class);
+//                            Gson gson = new Gson();
+//                            model = gson.fromJson(string, WeatherModel.class);
 //                            Log.i("Gson", new WeatherModel().getCity().getName());
 
                         }

@@ -69,7 +69,7 @@ public class WeatherProvider {
     private WeatherModel getWeatherRetrofit(String city) {
 
 //        String urlCity = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + KEY;
-        Call<WeatherModel> call = weatherApi.getWeatherRetrofit(city +",ru", "e83d0265c9865659af525e50e89b8edd");
+        Call<WeatherModel> call = weatherApi.getWeatherRetrofit("Moscow,ru", "e83d0265c9865659af525e50e89b8edd");
         retrofit2.Response<WeatherModel> response = null;
         try {
             response = call.execute();
@@ -103,11 +103,12 @@ public class WeatherProvider {
             public void run() {
                 //fixme create listener
                 //work thread
-                WeatherModel model = getWeatherRetrofit("Moscow");
+//                WeatherModel model = getWeatherRetrofit("Moscow");
+                WeatherModel model = getWeatherUrl("Moscow");
 //                WeatherModel model = getWeatherByOkHttp("Lisbon");
-                if (model == null) {
-                    return;
-                }
+//                if (model == null) {
+//                    return;
+//                }
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -121,7 +122,7 @@ public class WeatherProvider {
 
 
             }
-        }, 100, 5000);
+        }, 5000, 5000);
     }
 
     void stop() {

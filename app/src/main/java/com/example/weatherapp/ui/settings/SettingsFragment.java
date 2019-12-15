@@ -78,8 +78,8 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
     public void updateData(WeatherModel model) {
         //fixme listener of city
 //        cityPreferences.setCity(String.valueOf(model.getCity().getId()));
-        idOfCity.setText(model.getCity().getId());
-
+        idOfCity.setText(model.getCity().getName());
+//        Log.i("idOfCity", model.getCity().getId().toString());
 
     }
 }

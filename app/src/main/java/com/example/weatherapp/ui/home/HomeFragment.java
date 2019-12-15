@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         cityPreferences = new CityPreferences(getActivity());
 
         /**Get city from  cityPreferences*/
-//        yourCurrentLocation.setText(cityPreferences.getCity());
+        yourCurrentLocation.setText(cityPreferences.getCity());
 
 
 

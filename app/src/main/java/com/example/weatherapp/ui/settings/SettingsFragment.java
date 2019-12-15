@@ -1,13 +1,11 @@
 package com.example.weatherapp.ui.settings;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,15 +17,19 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.weatherapp.CityPreferences;
 import com.example.weatherapp.R;
+import com.example.weatherapp.WeatherProvider;
+import com.example.weatherapp.WeatherProviderListener;
+import com.example.weatherapp.weatherModel.WeatherModel;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements WeatherProviderListener {
 
 
     SharedPreferences sharedPreferences;
     CityPreferences cityPreferences;
     TextInputEditText editText;
     SwitchCompat switchToDarkMode;
+    TextView idOfCity;
 
     private SettingsViewModel settingsViewModel;
 
@@ -47,6 +49,10 @@ public class SettingsFragment extends Fragment {
         cityPreferences = new CityPreferences(getActivity());
         switchToDarkMode = root.findViewById(R.id.switchToDarkMode);
         switchToDarkMode.setChecked(cityPreferences.getDarkMode());
+        idOfCity = root.findViewById(R.id.idOfCity);
+
+        //fixme add lestener
+        WeatherProvider.getInstance().addListener(this);
 
 
 
@@ -66,5 +72,14 @@ public class SettingsFragment extends Fragment {
 
 
         super.onPause();
+    }
+
+    @Override
+    public void updateData(WeatherModel model) {
+        //fixme listener of city
+//        cityPreferences.setCity(String.valueOf(model.getCity().getId()));
+        idOfCity.setText(model.getCity().getId());
+
+
     }
 }

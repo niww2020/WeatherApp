@@ -43,6 +43,8 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     CityPreferences cityPreferences;
+    WeatherModel weatherModel;
+
     private static String KEY = "e83d0265c9865659af525e50e89b8edd";
 
     @Override
@@ -75,11 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        cityPreferences.setCity("Moscow");
 
-        loadWedViewOkHttpAndParseJson("Lisboa");
+//        loadWedViewOkHttpAndParseJson("Lisboa");
 //        loadWedViewHttpURL();
 
-        /** load picture */
-//        Picasso.
 
 
     }
@@ -87,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+//        Toast.makeText(getApplicationContext(),
+//                                    weatherModel.getCity().getName()== null ? "null":weatherModel.getCity().getName()
+//                                    , Toast.LENGTH_SHORT).show();
 
     }
 
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                             /** parsing JSON and save to WeatherModel.class*/
                             Gson gson = new Gson();
                             model = gson.fromJson(string, WeatherModel.class);
+//                            Log.i("Gson", model.getCity().getName());
 
 //                            Toast.makeText(getApplicationContext(),
 //                                    model.getCity().getName()== null ? "null":model.getCity().getName()

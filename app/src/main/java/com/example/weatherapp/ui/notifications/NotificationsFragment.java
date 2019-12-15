@@ -31,6 +31,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.stream.Collectors;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -43,6 +45,7 @@ public class NotificationsFragment extends Fragment {
     WebView webView;
     SeekBar seekBar;
     Retrofit retrofit;
+    WeatherModel weatherModel;
 
 
     private static String KEY = "e83d0265c9865659af525e50e89b8edd";
@@ -92,6 +95,7 @@ public class NotificationsFragment extends Fragment {
             }
         });
 //        webView.loadUrl(url);
+//        loadWedViewOkHttpAndParseJson(webView,"Lisboa");
 
 
         return root;
@@ -113,8 +117,9 @@ public class NotificationsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        loadWedViewHttpURL(webView);
-        loadWedViewOkHttpAndParseJson(webView,"Lisboa");
-
+        loadWedViewOkHttpAndParseJson(webView,"Moscow");
+//        weatherModel = new WeatherModel();
+//        Log.i("Gson", weatherModel.getCity().toString());
 
     }
 
@@ -136,6 +141,7 @@ public class NotificationsFragment extends Fragment {
         final Handler handler = new Handler();
         Log.i("Thread", Thread.currentThread().getName());
         new Thread(new Runnable() {
+            WeatherModel model = null;
             @Override
             public void run() {
                 try {
@@ -156,6 +162,12 @@ public class NotificationsFragment extends Fragment {
                             public void run() {
 //                                webView.loadUrl(url);
                                 webView.loadData(result, "text/html; charset=utf-8", "utf-8");
+
+
+                                /** parsing JSON and save to WeatherModel.class*/
+                                Gson gson = new Gson();
+                                model = gson.fromJson(result, WeatherModel.class);
+//                                Log.i("Gson", model.getCity().getName());
                             }
                         });
                     }
@@ -173,7 +185,7 @@ public class NotificationsFragment extends Fragment {
         }).start();
     }
 
-    private void loadWedViewOkHttpAndParseJson(final WebView webView, String cityName) {
+    private void loadWedViewOkHttpAndParseJson(final WebView webView, String city) {
         final Handler handler = new Handler();
         /** create Okhttp*/
         OkHttpClient client = new OkHttpClient();
@@ -186,7 +198,7 @@ public class NotificationsFragment extends Fragment {
             public void run() {
 
                 Request request = new Request.Builder()
-                        .url("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=" + KEY)
+                        .url("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=" + KEY)
                         .build();
 
                 try {
@@ -201,6 +213,7 @@ public class NotificationsFragment extends Fragment {
                             /** parsing JSON and save to WeatherModel.class*/
                             Gson gson = new Gson();
                             model = gson.fromJson(string, WeatherModel.class);
+//                            Log.i("Gson", new WeatherModel().getCity().getName());
 
                         }
                     });

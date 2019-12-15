@@ -185,7 +185,7 @@ public class NotificationsFragment extends Fragment {
         }).start();
     }
 
-    private void loadWedViewOkHttpAndParseJson(final WebView webView, String city) {
+    private void loadWedViewOkHttpAndParseJson(final WebView webView, String sity) {
         final Handler handler = new Handler();
         /** create Okhttp*/
         OkHttpClient client = new OkHttpClient();
@@ -198,7 +198,7 @@ public class NotificationsFragment extends Fragment {
             public void run() {
 
                 Request request = new Request.Builder()
-                        .url("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=" + KEY)
+                        .url("http://api.openweathermap.org/data/2.5/weather?q="+sity+"&appid=" + KEY)
                         .build();
 
                 try {
@@ -211,8 +211,8 @@ public class NotificationsFragment extends Fragment {
                             webView.loadData(string, "text/html; charset=utf-8", "utf-8");
 
                             /** parsing JSON and save to WeatherModel.class*/
-//                            Gson gson = new Gson();
-//                            model = gson.fromJson(string, WeatherModel.class);
+                            Gson gson = new Gson();
+                            model = gson.fromJson(string, WeatherModel.class);
 //                            Log.i("Gson", new WeatherModel().getCity().getName());
 
                         }

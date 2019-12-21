@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
 //        loadWedViewOkHttpAndParseJson("Lisboa");
 //        loadWedViewHttpURL();
 
+        //fixme
+//        WeatherProvider.getInstance();
+
 
 
     }

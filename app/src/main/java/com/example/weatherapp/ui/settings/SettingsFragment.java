@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
     TextInputEditText editText;
     SwitchCompat switchToDarkMode;
     TextView idOfCity;
+    WeatherModel weatherModel;
 
     private SettingsViewModel settingsViewModel;
 
@@ -48,12 +51,30 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
 
         cityPreferences = new CityPreferences(getActivity());
         switchToDarkMode = root.findViewById(R.id.switchToDarkMode);
+
+        //change theme on checked switch
+        switchToDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (cityPreferences.getDarkMode() != isChecked) {
+                    getActivity().recreate();
+                }
+
+            }
+        });
+
         switchToDarkMode.setChecked(cityPreferences.getDarkMode());
         idOfCity = root.findViewById(R.id.idOfCity);
 
-        //fixme add lestener
-        WeatherProvider.getInstance().addListener(this);
+//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel().getCity().getName());
 
+        //fixme add lestener
+//        WeatherProvider.getInstance().addListener(this);
+//        weatherModel = new WeatherModel();
+
+
+//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());//fixme обращение к сети из основного потока??
+//        idOfCity.setText(weatherModel.getCity().getName());
 
 
         editText = root.findViewById(R.id.etYourLocation);
@@ -70,16 +91,20 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
         Log.i("Switch", String.valueOf(switchToDarkMode.isChecked()));
 
 
-
         super.onPause();
     }
 
     @Override
     public void updateData(WeatherModel model) {
         //fixme listener of city
+//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());
+//        editText.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());
 //        cityPreferences.setCity(String.valueOf(model.getCity().getId()));
-        idOfCity.setText(model.getCity().getName());
+//        idOfCity.setText(model.getCity().getName());
+        editText.setText(model.getCity().getName());
+//        Toast.makeText(getContext(),model.getCity().getName() , Toast.LENGTH_SHORT).show();
 //        Log.i("idOfCity", model.getCity().getId().toString());
+//        idOfCity.setText(model.getCity().getName());
 
     }
 }

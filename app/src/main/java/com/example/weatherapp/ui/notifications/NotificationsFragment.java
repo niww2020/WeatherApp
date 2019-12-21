@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.weatherapp.CustomTextView;
 import com.example.weatherapp.R;
+import com.example.weatherapp.WeatherProvider;
 import com.example.weatherapp.weatherModel.WeatherModel;
 import com.google.gson.Gson;
 
@@ -46,6 +47,8 @@ public class NotificationsFragment extends Fragment {
     SeekBar seekBar;
     Retrofit retrofit;
     WeatherModel weatherModel;
+    WeatherModel model ;
+    TextView tvNotifications;
 
 
     private static String KEY = "e83d0265c9865659af525e50e89b8edd";
@@ -72,6 +75,8 @@ public class NotificationsFragment extends Fragment {
 
         webView = root.findViewById(R.id.webView);
         seekBar = root.findViewById(R.id.seekBar);
+        tvNotifications = root.findViewById(R.id.tvNotifications);
+        model = null;
 
 
 
@@ -117,7 +122,8 @@ public class NotificationsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        loadWedViewHttpURL(webView);
-        loadWedViewOkHttpAndParseJson(webView,"Moscow");
+//        loadWedViewOkHttpAndParseJson(webView,"Moscow");
+//        tvNotifications.setText(model.getCity().getName());
 //        weatherModel = new WeatherModel();
 //        Log.i("Gson", weatherModel.getCity().toString());
 
@@ -167,7 +173,9 @@ public class NotificationsFragment extends Fragment {
                                 /** parsing JSON and save to WeatherModel.class*/
                                 Gson gson = new Gson();
                                 model = gson.fromJson(result, WeatherModel.class);
+
 //                                Log.i("Gson", model.getCity().getName());
+
                             }
                         });
                     }
@@ -192,7 +200,7 @@ public class NotificationsFragment extends Fragment {
 
 
         new Thread(new Runnable() {
-            WeatherModel model = null;
+//            WeatherModel model = null;
 
             @Override
             public void run() {
@@ -211,9 +219,10 @@ public class NotificationsFragment extends Fragment {
                             webView.loadData(string, "text/html; charset=utf-8", "utf-8");
 
                             /** parsing JSON and save to WeatherModel.class*/
-//                            Gson gson = new Gson();
-//                            model = gson.fromJson(string, WeatherModel.class);
-//                            Log.i("Gson", new WeatherModel().getCity().getName());
+                            Gson gson = new Gson();
+                            model = gson.fromJson(string, WeatherModel.class);
+//
+                            tvNotifications.setText(model.getCity().getName());
 
                         }
                     });

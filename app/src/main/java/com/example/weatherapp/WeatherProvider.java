@@ -43,6 +43,7 @@ public class WeatherProvider {
     private static String KEY = "e83d0265c9865659af525e50e89b8edd";
     private Retrofit retrofit;
     OpenWeather weatherApi;
+    WeatherModel weatherModel ;
 
 
     public static WeatherProvider getInstance() {
@@ -59,11 +60,12 @@ public class WeatherProvider {
         weatherApi = retrofit.create(OpenWeather.class);
         startData();
 
+
     }
 
     interface OpenWeather{
-        @GET
-        Call<WeatherModel> getWeatherRetrofit(@Path("data/2.5/weather") @Query("q") String q, @Query("appid") String key);
+        @GET("data/2.5/weather")
+        Call<WeatherModel> getWeatherRetrofit(@Query("q") String q, @Query("appid") String key);
     }
 
     private WeatherModel getWeatherRetrofit(String city) {
@@ -103,9 +105,10 @@ public class WeatherProvider {
             public void run() {
                 //fixme create listener
                 //work thread
-                WeatherModel model = getWeatherRetrofit("Moscow");
+                 WeatherModel model = getWeatherRetrofit("Moscow");
 //                WeatherModel model = getWeatherUrl("Moscow");
 //                WeatherModel model = getWeatherByOkHttp("Lisbon");
+//                weatherModel = getWeatherByOkHttp("Lisbon");
 //                if (model == null) {
 //                    return;
 //                }
@@ -122,7 +125,7 @@ public class WeatherProvider {
 
 
             }
-        }, 5000, 5000);
+        }, 5000, 10000);
     }
 
     void stop() {
@@ -185,4 +188,10 @@ public class WeatherProvider {
 
         return model;
     }
+
+    public WeatherModel getWeatherModel(String s) {
+//        return getWeatherByOkHttp(s);
+        return getWeatherRetrofit("Moscow");
+    }
+
 }

@@ -43,7 +43,7 @@ public class WeatherProvider {
     private static String KEY = "e83d0265c9865659af525e50e89b8edd";
     private Retrofit retrofit;
     OpenWeather weatherApi;
-    WeatherModel weatherModel ;
+    WeatherModel weatherModel;
 
 
     public static WeatherProvider getInstance() {
@@ -63,7 +63,7 @@ public class WeatherProvider {
 
     }
 
-    interface OpenWeather{
+    interface OpenWeather {
         @GET("data/2.5/weather")
         Call<WeatherModel> getWeatherRetrofit(@Query("q") String q, @Query("appid") String key);
     }
@@ -71,7 +71,7 @@ public class WeatherProvider {
     private WeatherModel getWeatherRetrofit(String city) {
 
 //        String urlCity = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + KEY;
-        Call<WeatherModel> call = weatherApi.getWeatherRetrofit(city+",ru", "e83d0265c9865659af525e50e89b8edd");
+        Call<WeatherModel> call = weatherApi.getWeatherRetrofit(city + ",ru", "e83d0265c9865659af525e50e89b8edd");
         retrofit2.Response<WeatherModel> response = null;
         try {
             response = call.execute();
@@ -96,22 +96,23 @@ public class WeatherProvider {
     }
 
 
-
-
     private void startData() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
+
             @Override
             public void run() {
                 //fixme create listener
                 //work thread
-                 WeatherModel model = getWeatherRetrofit("Moscow");
+//                 WeatherModel model = getWeatherRetrofit("Moscow");
 //                WeatherModel model = getWeatherUrl("Moscow");
-//                WeatherModel model = getWeatherByOkHttp("Lisbon");
-//                weatherModel = getWeatherByOkHttp("Lisbon");
+                WeatherModel model = getWeatherByOkHttp("Lisbon");
 //                if (model == null) {
 //                    return;
 //                }
+
+//                        WeatherModel model = getWeatherByOkHttp("Moscow");
+
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -125,7 +126,7 @@ public class WeatherProvider {
 
 
             }
-        }, 5000, 10000);
+        }, 2000, 10000);
     }
 
     void stop() {

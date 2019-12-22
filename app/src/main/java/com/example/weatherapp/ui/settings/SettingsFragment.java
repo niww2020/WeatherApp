@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -31,7 +30,7 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
     CityPreferences cityPreferences;
     TextInputEditText editText;
     SwitchCompat switchToDarkMode;
-    TextView idOfCity;
+    TextView tvIdOfCity;
     WeatherModel weatherModel;
 
     private SettingsViewModel settingsViewModel;
@@ -64,17 +63,17 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
         });
 
         switchToDarkMode.setChecked(cityPreferences.getDarkMode());
-        idOfCity = root.findViewById(R.id.idOfCity);
+        tvIdOfCity = root.findViewById(R.id.idOfCity);
 
-//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel().getCity().getName());
+//        tvIdOfCity.setText(WeatherProvider.getInstance().getWeatherModel().getCity().getName());
 
-        //fixme add lestener
+        //fixme add listener
 //        WeatherProvider.getInstance().addListener(this);
 //        weatherModel = new WeatherModel();
 
 
-//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());//fixme обращение к сети из основного потока??
-//        idOfCity.setText(weatherModel.getCity().getName());
+//        tvIdOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());//fixme обращение к сети из основного потока??
+//        tvIdOfCity.setText(weatherModel.getCity().getName());
 
 
         editText = root.findViewById(R.id.etYourLocation);
@@ -97,14 +96,26 @@ public class SettingsFragment extends Fragment implements WeatherProviderListene
     @Override
     public void updateData(WeatherModel model) {
         //fixme listener of city
-//        idOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());
+        //запуск в новом потоке?
+//        getActivity().runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                editText.setText(model.getCity().getName());
+//
+//            }
+//        });
+        // но почему-то можно без runOnUiThread
+//        (TextView)getActivity().findViewById(R.id.yourCurrentLocation).setText()
+//        editText.setText(model.getCity().getName());
+//        tvIdOfCity.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());
+        tvIdOfCity.setText(model.getCity().getName());
 //        editText.setText(WeatherProvider.getInstance().getWeatherModel("Moscow").getCity().getName());
 //        cityPreferences.setCity(String.valueOf(model.getCity().getId()));
-//        idOfCity.setText(model.getCity().getName());
-        editText.setText(model.getCity().getName());
+//        tvIdOfCity.setText("Moscow");
 //        Toast.makeText(getContext(),model.getCity().getName() , Toast.LENGTH_SHORT).show();
-//        Log.i("idOfCity", model.getCity().getId().toString());
-//        idOfCity.setText(model.getCity().getName());
+//        Log.i("tvIdOfCity", model.getCity().getId().toString());
+//        tvIdOfCity.setText(model.getCity().getName());
 
     }
 }
